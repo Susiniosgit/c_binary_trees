@@ -14,10 +14,13 @@ size_t binary_tree_size(const binary_tree_t *tree)
 }
 
 /**
- * is_complete -
- *
+ * is_complete - helper func for binary_tree_is_complete
+ * @tree: pointer to root of tree
+ * @index: index of current node to be verified
+ * @size: total number of nodes in tree
+ * Return: 1 if true 0 if false
  */
-_Bool is_complete(const binary_tree_t *tree, unsigned index, size_t size)
+_Bool is_complete(const binary_tree_t *tree, unsigned int index, size_t size)
 {
 	if (!tree)
 		return (true);
