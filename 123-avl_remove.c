@@ -1,11 +1,13 @@
 #include "binary_trees.h"
 
 /**
- * sorted_array_to_avl -
- *
- * Return: 
+ * avl_remove - removes a node from an AVL tree
+ * @root: pointer to root of tree
+ * @value: value to be removed
+ * Return: pointer to the new root node of the tree after removing the desired
+ * value, and after rebalancing
  */
-avl_t *sorted_array_to_avl(int *array, size_t size)
+avl_t *avl_remove(avl_t *root, int value)
 {
 
 }

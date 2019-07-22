@@ -1,11 +1,13 @@
 #include "binary_trees.h"
 
 /**
- * heap_to_sorted_array -
- *
- * Return: 
+ * array_to_heap - builds a Max Binary Heap tree from an array
+ * @array: input array
+ * @size: size of array
+ * Return: pointer to the root node of the created Binary Heap,
+ * or NULL on failure
  */
-int *heap_to_sorted_array(heap_t *heap, size_t *size)
+heap_t *array_to_heap(int *array, size_t size)
 {
 
 }

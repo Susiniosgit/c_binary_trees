@@ -1,11 +1,11 @@
 #include "binary_trees.h"
 
 /**
- * array_to_heap -
- *
- * Return: 
+ * binary_tree_is_heap - checks if a binary tree is a valid Max Binary Heap
+ * @tree: pointer to root of tree
+ * Return: 1 if true 0 if false
  */
-heap_t *array_to_heap(int *array, size_t size)
+int binary_tree_is_heap(const binary_tree_t *tree)
 {
 
 }
