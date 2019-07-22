@@ -14,7 +14,7 @@ int main(void)
 
 	root = binary_tree_node(NULL, 98);
 	root->left = binary_tree_node(root, 12);
-	root->right = binary_tree_node(root, 402);
+	root->left = binary_tree_node(root, 402);
 	binary_tree_insert_right(root->left, 54);
 	binary_tree_insert_right(root, 128);
 	binary_tree_insert_left(root, 45);
@@ -29,5 +29,7 @@ int main(void)
 	printf("Balance of %d: %+d\n", root->right->n, balance);
 	balance = binary_tree_balance(root->left->left->right);
 	printf("Balance of %d: %+d\n", root->left->left->right->n, balance);
+	balance = binary_tree_balance(root->left->left->left);
+	printf("Balance of %d: %+d\n", root->left->left->left->n, balance);
 	return (0);
 }

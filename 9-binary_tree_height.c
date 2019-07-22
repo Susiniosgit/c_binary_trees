@@ -1,7 +1,5 @@
 #include "binary_trees.h"
 
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
-
 /**
  * _binary_tree_height - helper func for binary_tree_height
  * @tree: input tree
