@@ -1,10 +1,9 @@
 #include "binary_trees.h"
 
-avl_t *r = NULL;
-
 /**
  * balance_left - balances left side
  * @node: pointer to temp node
+ * Return: root of tree
  */
 avl_t *balance_left(avl_t *node)
 {
@@ -19,26 +18,18 @@ avl_t *balance_left(avl_t *node)
 		return (NULL);
 	if (x == y->left)
 	{
-		printf("rotate right\n");
 		ret = binary_tree_rotate_right(z);
-		binary_tree_print(r);
-		return (ret);
-	} else
-	{
-		printf("rotate left\n");
-		binary_tree_rotate_left(y);
-		binary_tree_print(r);
-		printf("rotate right\n");
-		ret = binary_tree_rotate_right(z);
-		binary_tree_print(r);
 		return (ret);
 	}
-	return (NULL);
+	binary_tree_rotate_left(y);
+	ret = binary_tree_rotate_right(z);
+	return (ret);
 }
 
 /**
  * balance_right - balances right side
  * @node: pointer to temp node
+ * Return: root of tree
  */
 avl_t *balance_right(avl_t *node)
 {
@@ -53,26 +44,18 @@ avl_t *balance_right(avl_t *node)
 		return (NULL);
 	if (x == y->right)
 	{
-		printf("rotate left\n");
 		ret = binary_tree_rotate_left(z);
-		binary_tree_print(r);
-		return (ret);
-	} else
-	{
-		printf("rotate right\n");
-		binary_tree_rotate_right(y);
-		binary_tree_print(r);
-		printf("rotate left\n");
-		ret = binary_tree_rotate_left(z);
-		binary_tree_print(r);
 		return (ret);
 	}
-	return (NULL);
+	binary_tree_rotate_right(y);
+	ret = binary_tree_rotate_left(z);
+	return (ret);
 }
 
 /**
  * rebalance - rebalance AVL tree
  * @node: pointer to node to rebalance
+ * @tree: double pointer to root of tree
  * Return: pointer to input node
  */
 avl_t *rebalance(avl_t *node, avl_t **tree)
@@ -84,7 +67,6 @@ avl_t *rebalance(avl_t *node, avl_t **tree)
 	while (tmp)
 	{
 		bal = binary_tree_balance(tmp);
-		printf("balance = %i\n", bal);
 		if (bal > 1)
 		{
 			root = balance_left(tmp);
@@ -112,8 +94,6 @@ avl_t *avl_insert(avl_t **tree, int value)
 {
 	avl_t *av, *node;
 
-	r = *tree;
-
 	if (!tree)
 		return (NULL);
 	av = calloc(1, sizeof(avl_t));
@@ -136,7 +116,6 @@ avl_t *avl_insert(avl_t **tree, int value)
 			{
 				av->parent = node;
 				node->left = av;
-				binary_tree_print(*tree);
 				return (rebalance(node->left, tree));
 			}
 			node = node->left;
@@ -146,7 +125,6 @@ avl_t *avl_insert(avl_t **tree, int value)
 			{
 				av->parent = node;
 				node->right = av;
-				binary_tree_print(*tree);
 				return (rebalance(node->right, tree));
 			}
 			node = node->right;
