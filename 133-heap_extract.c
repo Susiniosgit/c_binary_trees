@@ -184,10 +184,8 @@ int heap_extract(heap_t **root)
 		return (res);
 	}
 	binary = convert(size, 2, 1);
-
 	for (i = 1; i < strlen(binary); i++)
 	{
-
 		c = binary[i];
 		if (i == strlen(binary) - 1)
 		{
@@ -207,7 +205,6 @@ int heap_extract(heap_t **root)
 		else if (c == '0')
 			tmp = tmp->left;
 	}
-
 	head = *root;
 	head = swap_head(head, tmp);
 	res = head->n;
