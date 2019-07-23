@@ -8,5 +8,17 @@
  */
 avl_t *array_to_avl(int *array, size_t size)
 {
+	size_t i = 0;
+	avl_t *root = NULL;
 
+	if (!array)
+		return (NULL);
+	while (i < size)
+	{
+		avl_insert(&root, array[i]);
+		binary_tree_print(root);
+		printf("=======================================================\n\n");
+		i++;
+	}
+	return (root);
 }
