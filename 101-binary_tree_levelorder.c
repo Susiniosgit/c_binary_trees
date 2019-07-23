@@ -30,6 +30,13 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	return (_binary_tree_height(tree) - 1);
 }
 
+
+/**
+ * print_level - prints a given tree level recursively
+ * @tree: pointer to root of tree
+ * @func: function to be called on each node
+ * @level: the tree depth level to print
+ */
 void print_level(const binary_tree_t *tree, void (*func)(int), size_t level)
 {
 	if (!level)

@@ -47,7 +47,7 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 		return (NULL);
 	if (is_descendant(first, second))
 		return ((binary_tree_t *)first);
-	else if(is_descendant(second, first))
+	else if (is_descendant(second, first))
 		return ((binary_tree_t *)second);
 	return ((binary_tree_t *)_binary_trees_ancestor(first->parent, second));
 }
