@@ -13,14 +13,13 @@ heap_t *swap_head(heap_t *head, heap_t *node)
 		node->parent->left = NULL;
 	} else
 		node->parent->right = NULL;
-
 	node->parent = NULL;
 	node->left = head->left;
 	node->right = head->right;
-
-	head->left->parent = node;
-	head->right->parent = node;
-
+	if (head->left)
+		head->left->parent = node;
+	if (head->right)
+		head->right->parent = node;
 	return (head);
 }
 
@@ -32,6 +31,7 @@ heap_t *swap_head(heap_t *head, heap_t *node)
 heap_t *perc_down(heap_t *node)
 {
 	int max;
+	_Bool left_child = false;
 
 	if (!node || (!node->left && !node->right))
 	{
@@ -39,11 +39,22 @@ heap_t *perc_down(heap_t *node)
 			node = node->parent;
 		return (node);
 	}
-
-	max = MAX(node->left->n, node->right->n);
+	if (node->left && node->right)
+	{
+		max = MAX(node->left->n, node->right->n);
+		if (max == node->left->n)
+			left_child = true;
+	}
+	else if (node->left && !node->right)
+	{
+		max = node->left->n;
+		left_child = true;
+	}
+	else if (!node->left && node->right)
+		max = node->right->n;
 	if (node->n <= max)
 	{
-		if (max == node->left->n)
+		if (left_child)
 		{
 			swap(node, node->left);
 			perc_down(node);
@@ -66,18 +77,27 @@ heap_t *perc_down(heap_t *node)
 int heap_extract(heap_t **root)
 {
 	size_t size, i;
-	int res;
 	char *binary;
 	char c;
+	int res;
 	heap_t *tmp, *head;
 
 	if (!root || !*root)
 		return (0);
 	tmp = *root;
 	size = binary_tree_size(*root);
+	if (size == 1)
+	{
+		res = tmp->n;
+		free(tmp);
+		*root = NULL;
+		return (res);
+	}
 	binary = convert(size, 2, 1);
+
 	for (i = 1; i < strlen(binary); i++)
 	{
+
 		c = binary[i];
 		if (i == strlen(binary) - 1)
 		{
@@ -97,6 +117,7 @@ int heap_extract(heap_t **root)
 		else if (c == '0')
 			tmp = tmp->left;
 	}
+
 	head = *root;
 	head = swap_head(head, tmp);
 	res = head->n;
