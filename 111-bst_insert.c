@@ -27,7 +27,10 @@ bst_t *bst_insert(bst_t **tree, int value)
 	while (node)
 	{
 		if (value == node->n)
+		{
+			free(bt);
 			return (NULL);
+		}
 		if (value < node->n)
 		{
 			if (!node->left)
@@ -46,5 +49,6 @@ bst_t *bst_insert(bst_t **tree, int value)
 			node = node->right;
 		}
 	}
+	free(bt);
 	return (NULL);
 }
