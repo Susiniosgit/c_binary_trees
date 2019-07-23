@@ -1,83 +1,78 @@
 #include "binary_trees.h"
 
-avl_t *r = NULL;
+/**
+ * balance_left - balances left side
+ * @node: pointer to temp node
+ */
+void balance_left(avl_t *node)
+{
+	avl_t *z, *x, *y;
 
+	z = node;
+	y = z->left;
+	if (!y)
+		return;
+	x = binary_tree_balance(y) < 0 ? y->right : y->left;
+	if (!x)
+		return;
+	if (x == y->left)
+	{
+		binary_tree_rotate_right(z);
+	} else
+	{
+		binary_tree_rotate_left(y);
+		binary_tree_rotate_right(z);
+	}
+}
+
+/**
+ * balance_right - balances right side
+ * @node: pointer to temp node
+ */
+void balance_right(avl_t *node)
+{
+	avl_t *z, *x, *y;
+
+	z = node;
+	y = z->right;
+	if (!y)
+		return;
+	x = binary_tree_balance(y) < 0 ? y->right : y->left;
+	if (!x)
+		return;
+	if (x == y->right)
+	{
+		binary_tree_rotate_left(z);
+	} else
+	{
+		binary_tree_rotate_right(y);
+		binary_tree_rotate_left(z);
+	}
+
+}
+
+/**
+ * rebalance - rebalance AVL tree
+ * @node: pointer to node to rebalance
+ * Return: pointer to input node
+ */
 avl_t *rebalance(avl_t *node)
 {
-	avl_t *tmp, *z, *x, *y;
+	avl_t *tmp;
 	int bal;
 
 	tmp = node->parent;
 	while (tmp)
 	{
 		bal = binary_tree_balance(tmp);
-		printf("bal = %i\n", bal);
 		if (bal > 1)
-		{
-			/* right rotate */
-			z = tmp;
-			printf("z's value = %i\n", z->n);
-			y = z->left;
-			if (!y)
-				return (node);
-			x = binary_tree_balance(y) < 0 ? y->right : y->left;
-			if (!x)
-				return (node);
-			if (x == y->left)
-			{
-				printf("rotating right z...\n");
-				binary_tree_rotate_right(z);
-				printf("nonfailure!\n");
-				return (node);
-				
-			}
-			else
-			{
-				printf("rotating left y...\n");
-				binary_tree_rotate_left(y);
-				binary_tree_print(r);
-				printf("rotating right z...\n");
-				binary_tree_rotate_right(z);
-				binary_tree_print(r);
-				printf("nonfailure!\n");
-				printf("============\n");
-				return (node);
-			}
-		} else if (bal < -1)
-		{
-			/* left rotate */
-			z = tmp;
-			printf("z's value = %i\n", z->n);
-			y = z->right;
-			if (!y)
-				return (node);
-			x = binary_tree_balance(y) < 0 ? y->right : y->left;
-			if (!x)
-				return (node);
-			if (x == y->right)
-			{
-				printf("rotating left z...\n");
-				binary_tree_rotate_left(z);
-				printf("nonfailure!\n");
-				return (node);
-			}
-			else
-			{
-				printf("rotating right y...\n");
-				binary_tree_rotate_right(y);
-				printf("rotating left z...\n");
-				binary_tree_rotate_left(z);
-				printf("nonfailure!\n");
-				return (node);
-			}
-		}
+			balance_left(tmp);
+		else if (bal < -1)
+			balance_right(tmp);
 		tmp = tmp->parent;
 	}
 	return (node);
 }
-
-
-
 
 /**
  * avl_insert - inserts a value in an AVL Tree
@@ -95,13 +90,11 @@ avl_t *avl_insert(avl_t **tree, int value)
 	if (!av)
 		return (NULL);
 	av->n = value;
-
 	if (!*tree)
 	{
 		*tree = av;
 		return (av);
 	}
-	r = *tree;
 	node = *tree;
 	while (node)
 	{
