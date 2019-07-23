@@ -98,9 +98,10 @@ int heap_extract(heap_t **root)
 	}
 	head = *root;
 	head = swap_head(head, tmp);
+	i = head->n;
 	free(head);
 	*root = tmp;
 	tmp = perc_down(tmp);
 	*root = tmp;
-	return (head->n);
+	return (i);
 }
