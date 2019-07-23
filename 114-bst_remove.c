@@ -50,6 +50,8 @@ bst_t *swap(bst_t *node, bst_t *new)
 	}
 	printf("POST !NEW\n");
 		
+	if (new->parent && new->parent != node)
+		new->parent->left = NULL;
 	new->parent = node->parent;
 	if (node->parent)
 	{
@@ -60,17 +62,18 @@ bst_t *swap(bst_t *node, bst_t *new)
 	}
 	printf("POST IF PARENT\n");
 	
-	new->left = node->left;
-	node->left->parent = new;	
-	if (node->right != new)
+	if (node->left != new)
+	{
+		new->left = node->left;
+		node->left->parent = new;	
+	}	
+	if (node->right && node->right != new)
 	{
 		new->right = node->right;
 		node->right->parent = new;
 	}
 
 	printf("FOOO\n");
-	if (new->parent && new->parent != node)
-		new->parent->left = NULL;
 	temp = new;
 	printf("PRE WHILE\n");
 	while (temp->parent)
