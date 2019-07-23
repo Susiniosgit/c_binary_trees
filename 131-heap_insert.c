@@ -149,7 +149,6 @@ heap_t *heap_insert(heap_t **root, int value)
 		}
 	}
 	tmp = *root;
-	binary_tree_print(tmp);
 	while (ht->parent && ht->n > ht->parent->n)
 	{
 		/*
