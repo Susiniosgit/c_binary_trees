@@ -66,6 +66,7 @@ heap_t *perc_down(heap_t *node)
 int heap_extract(heap_t **root)
 {
 	size_t size, i;
+	int res;
 	char *binary;
 	char c;
 	heap_t *tmp, *head;
@@ -98,10 +99,10 @@ int heap_extract(heap_t **root)
 	}
 	head = *root;
 	head = swap_head(head, tmp);
-	i = head->n;
+	res = head->n;
 	free(head);
 	*root = tmp;
 	tmp = perc_down(tmp);
 	*root = tmp;
-	return (i);
+	return (res);
 }
