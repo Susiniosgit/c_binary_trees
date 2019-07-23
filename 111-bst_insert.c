@@ -8,5 +8,27 @@
  */
 bst_t *bst_insert(bst_t **tree, int value)
 {
+	binary_tree_t *bt = NULL;
+
+	bt = calloc(1, sizeof(binary_tree_t));
+	if (!bt)
+		return (NULL);
+	bt->n = value;
+
+	/* insert as root */
+	if (!*tree)
+	{
+		*tree = bt;
+		return (bt);
+	}
+
+	/* traverse left */
+	if (value < tree->n)
+	{
+
+	} else
+	{
+
+	}
 
 }
