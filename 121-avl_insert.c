@@ -63,7 +63,7 @@ avl_t *rebalance(avl_t *node, avl_t **tree)
 	avl_t *tmp, *root;
 	int bal;
 
-	tmp = node->parent;
+	tmp = node;
 	while (tmp)
 	{
 		bal = binary_tree_balance(tmp);
