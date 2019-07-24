@@ -1,5 +1,7 @@
 #include "binary_trees.h"
 
+avl_t *r = NULL;
+
 avl_t *rebalance(avl_t *node)
 {
 	avl_t *tmp, *z, *x, *y;
@@ -23,19 +25,22 @@ avl_t *rebalance(avl_t *node)
 				return (node);
 			if (x == y->left)
 			{
-				printf("rotating left...\n");
-				binary_tree_rotate_left(z);
+				printf("rotating right z...\n");
+				binary_tree_rotate_right(z);
 				printf("nonfailure!\n");
 				return (node);
 				
 			}
 			else
 			{
-				printf("rotating right...\n");
-				binary_tree_rotate_right(y);
-				printf("rotating again left...\n");
-				binary_tree_rotate_left(z);
+				printf("rotating left y...\n");
+				binary_tree_rotate_left(y);
+				binary_tree_print(r);
+				printf("rotating right z...\n");
+				binary_tree_rotate_right(z);
+				binary_tree_print(r);
 				printf("nonfailure!\n");
+				printf("============\n");
 				return (node);
 			}
 		} else if (bal < -1)
@@ -49,19 +54,19 @@ avl_t *rebalance(avl_t *node)
 			x = binary_tree_balance(y) < 0 ? y->right : y->left;
 			if (!x)
 				return (node);
-			if (x == y->left)
+			if (x == y->right)
 			{
-				printf("rotating right...\n");
-				binary_tree_rotate_right(z);
+				printf("rotating left z...\n");
+				binary_tree_rotate_left(z);
 				printf("nonfailure!\n");
 				return (node);
 			}
 			else
 			{
-				printf("rotating left...\n");
-				binary_tree_rotate_left(y);
-				printf("rotating again right...\n");
-				binary_tree_rotate_right(z);
+				printf("rotating right y...\n");
+				binary_tree_rotate_right(y);
+				printf("rotating left z...\n");
+				binary_tree_rotate_left(z);
 				printf("nonfailure!\n");
 				return (node);
 			}
@@ -96,6 +101,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 		*tree = av;
 		return (av);
 	}
+	r = *tree;
 	node = *tree;
 	while (node)
 	{
