@@ -15,43 +15,60 @@ avl_t *rebalance(avl_t *node)
 			/* right rotate */
 			z = tmp;
 			printf("z's value = %i\n", z->n);
-			y = z->right;
-			x = binary_tree_balance(y) < 0 ? y->left : y->right;
-			printf("done\n");
-			if (x == y->left)
+			y = z->left;
+			if (!y)
+				return (node);
+			x = binary_tree_balance(y) < 0 ? y->right : y->left;
+			if (!x)
+				return (node);
+			if (x == y->right)
 			{
+				printf("rotating left...\n");
 				binary_tree_rotate_left(z);
-				printf("rotate right success!\n");
+				printf("nonfailure!\n");
+				return (node);
+				
 			}
 			else
 			{
-				binary_tree_rotate_right(y);;
-				printf("rotate right success!\n");
-				return (binary_tree_rotate_left(z));
+				printf("rotating right...\n");
+				binary_tree_rotate_right(y);
+				printf("rotating again left...\n");
+				binary_tree_rotate_left(z);
+				printf("nonfailure!\n");
+				return (node);
 			}
-		} else if (bal < 1)
+		} else if (bal < -1)
 		{
 			/* left rotate */
 			z = tmp;
 			printf("z's value = %i\n", z->n);
-			y = z->left;
-			x = binary_tree_balance(y) < 0 ? y->left : y->right;
-			printf("done\n");
+			y = z->right;
+			if (!y)
+				return (node);
+			x = binary_tree_balance(y) < 0 ? y->right : y->left;
+			if (!x)
+				return (node);
 			if (x == y->left)
 			{
+				printf("rotating right...\n");
 				binary_tree_rotate_right(z);
-				printf("rotate left success!\n");
+				printf("nonfailure!\n");
+				return (node);
 			}
 			else
 			{
-				binary_tree_rotate_left(y);;
-				printf("rotate left success!\n");
-				return (binary_tree_rotate_right(z));
+				printf("rotating left...\n");
+				binary_tree_rotate_left(y);
+				printf("rotating again right...\n");
+				binary_tree_rotate_right(z);
+				printf("nonfailure!\n");
+				return (node);
 			}
 		}
 		tmp = tmp->parent;
 	}
-	return (NULL);
+	return (node);
 }
 
 
