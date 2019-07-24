@@ -6,63 +6,68 @@ avl_t *r = NULL;
  * balance_left - balances left side
  * @node: pointer to temp node
  */
-void balance_left(avl_t *node)
+avl_t *balance_left(avl_t *node)
 {
-	avl_t *z, *x, *y;
+	avl_t *z, *x, *y, *ret;
 
 	z = node;
 	y = z->left;
 	if (!y)
-		return;
+		return (NULL);
 	x = binary_tree_balance(y) < 0 ? y->right : y->left;
 	if (!x)
-		return;
+		return (NULL);
 	if (x == y->left)
 	{
 		printf("rotate right\n");
-		binary_tree_rotate_right(z);
+		ret = binary_tree_rotate_right(z);
 		binary_tree_print(r);
+		return (ret);
 	} else
 	{
 		printf("rotate left\n");
 		binary_tree_rotate_left(y);
 		binary_tree_print(r);
 		printf("rotate right\n");
-		binary_tree_rotate_right(z);
+		ret = binary_tree_rotate_right(z);
 		binary_tree_print(r);
+		return (ret);
 	}
+	return (NULL);
 }
 
 /**
  * balance_right - balances right side
  * @node: pointer to temp node
  */
-void balance_right(avl_t *node)
+avl_t *balance_right(avl_t *node)
 {
-	avl_t *z, *x, *y;
+	avl_t *z, *x, *y, *ret;
 
 	z = node;
 	y = z->right;
 	if (!y)
-		return;
+		return (NULL);
 	x = binary_tree_balance(y) < 0 ? y->right : y->left;
 	if (!x)
-		return;
+		return (NULL);
 	if (x == y->right)
 	{
 		printf("rotate left\n");
-		binary_tree_rotate_left(z);
+		ret = binary_tree_rotate_left(z);
 		binary_tree_print(r);
+		return (ret);
 	} else
 	{
 		printf("rotate right\n");
 		binary_tree_rotate_right(y);
 		binary_tree_print(r);
 		printf("rotate left\n");
-		binary_tree_rotate_left(z);
+		ret = binary_tree_rotate_left(z);
 		binary_tree_print(r);
+		return (ret);
 	}
-
+	return (NULL);
 }
 
 /**
@@ -70,9 +75,9 @@ void balance_right(avl_t *node)
  * @node: pointer to node to rebalance
  * Return: pointer to input node
  */
-avl_t *rebalance(avl_t *node)
+avl_t *rebalance(avl_t *node, avl_t **tree)
 {
-	avl_t *tmp;
+	avl_t *tmp, *root;
 	int bal;
 
 	tmp = node->parent;
@@ -81,9 +86,17 @@ avl_t *rebalance(avl_t *node)
 		bal = binary_tree_balance(tmp);
 		printf("balance = %i\n", bal);
 		if (bal > 1)
-			balance_left(tmp);
+		{
+			root = balance_left(tmp);
+			if (root)
+				*tree = root;
+		}
 		else if (bal < -1)
-			balance_right(tmp);
+		{
+			root = balance_right(tmp);
+			if (root)
+				*tree = root;
+		}
 		tmp = tmp->parent;
 	}
 	return (node);
@@ -124,7 +137,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 				av->parent = node;
 				node->left = av;
 				binary_tree_print(*tree);
-				return (rebalance(node->left));
+				return (rebalance(node->left, tree));
 			}
 			node = node->left;
 		} else
@@ -134,7 +147,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 				av->parent = node;
 				node->right = av;
 				binary_tree_print(*tree);
-				return (rebalance(node->right));
+				return (rebalance(node->right, tree));
 			}
 			node = node->right;
 		}
