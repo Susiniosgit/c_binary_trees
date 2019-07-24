@@ -1,21 +1,63 @@
 #include "binary_trees.h"
 
+#define INIT_NODE {0, NULL, NULL, NULL}
 /**
  * swap - swaps two nodes in binary tree
+ * @a: first node
+ * @b: second node
+ * Return: pointer to root
+ */
+bst_t *swap(bst_t *a, bst_t *b)
+{
+	bst_t a_copy = INIT_NODE;
+
+	printf("SWAP!: %d with %d\n", a->n, b->n);
+	
+	a_copy.n = a->n;
+	a_copy.parent = a->parent;
+	a_copy.left = a->left;
+	a_copy.right = a->right;
+
+	a->parent = b;
+	a->left = b->left;
+	a->right = b->right;
+
+	b->parent = a_copy.parent;
+	if (b == a_copy.left)
+	{
+		b->left = a;
+		b->right = a_copy.right;
+	}
+	else
+	{
+		b->right = a;
+		b->left = a_copy.left;
+	}
+	while (b->parent)
+		b = b->parent;
+	return (b);
+}
+
+/**
+ * swap_old - swaps two nodes in binary tree
  * @node: first node
  * @new: second node
  * Return: pointer to root
  */
-bst_t *swap(bst_t *node, bst_t *new)
+bst_t *swap_old(bst_t *node, bst_t *new)
 {
 	bst_t *temp = NULL;
 	_Bool left_child = false;
 
 	if (node->parent)
 		left_child = node->parent->left == node;
+	
 	if (new->parent && new->parent != node)
-		new->parent->left = NULL;
+		new->parent->left = NULL; /* ??? */
+	
+
 	new->parent = node->parent;
+	/* if old node has a parent, set its child-relation to the new node */
 	if (node->parent)
 	{
 		if (left_child)
@@ -23,11 +65,14 @@ bst_t *swap(bst_t *node, bst_t *new)
 		else
 			node->parent->right = new;
 	}
+
+	/* set left child of old node to left child of new node, if they are not equal */
 	if (node->left != new)
 	{
 		new->left = node->left;
 		node->left->parent = new;
 	}
+	/* set right child of old node to right child of new node, if they are not equal */
 	if (node->right && node->right != new)
 	{
 		new->right = node->right;
@@ -113,12 +158,14 @@ heap_t *heap_insert(heap_t **root, int value)
 		{
 			if (c == '1')
 			{
+				printf("inserted %d as right child of %d\n", ht->n, tmp->n);
 				ht->parent = tmp;
 				tmp->right = ht;
 				break;
 			}
 			else if (c == '0')
 			{
+				printf("inserted %d as left child of %d\n", ht->n, tmp->n);
 				ht->parent = tmp;
 				tmp->left = ht;
 				break;
@@ -133,13 +180,18 @@ heap_t *heap_insert(heap_t **root, int value)
 		}
 	}
 	tmp = *root;
+	printf("AFTER INSERT TREE:\n");
+	binary_tree_print(tmp);
 	if (ht->n > ht->parent->n)
 	{
 		printf("=====================================\n");
 		printf("time to swap %i, %i\n", ht->n, ht->parent->n);
 		ret = swap(ht->parent, ht);
+		printf("RET: %d\n", ret->n);
 		if (ret)
 			*root = ret;
+		printf("PRINT: %d\n", (*root)->n);
+		binary_tree_print(*root);
 	}
 	return (ht);
 }
