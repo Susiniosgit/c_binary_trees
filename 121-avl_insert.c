@@ -21,7 +21,7 @@ avl_t *rebalance(avl_t *node)
 			x = binary_tree_balance(y) < 0 ? y->right : y->left;
 			if (!x)
 				return (node);
-			if (x == y->right)
+			if (x == y->left)
 			{
 				printf("rotating left...\n");
 				binary_tree_rotate_left(z);
