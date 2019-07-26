@@ -153,10 +153,10 @@ avl_t *avl_remove(avl_t *root, int value)
 
 	if (!root)
 		return (NULL);
-	return (root);
 	node = bst_search(root, value);
 	if (!node)
 		return (root);
+	return (root);
 	if (node->parent)
 		left_child = node->parent->left == node;
 	if (!node->right && !node->left)
