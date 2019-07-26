@@ -15,7 +15,7 @@ General
 * All files were created and compiled on Ubuntu 14.04.4 LTS on gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic
 * All files were linted for syntax and style with [Betty](https://github.com/holbertonschool/Betty)
 
-```sh
+```c
 /**
  * struct binary_tree_s - Binary tree node
  *
@@ -211,11 +211,10 @@ typedef struct binary_tree_s binary_tree_t;
   * If tree is NULL, return 0
   
 Properties of a Binary Search Tree:
-
-The left subtree of a node contains only nodes with values less than the node’s value
-The right subtree of a node contains only nodes with values greater than the node’s value
-The left and right subtree each must also be a binary search tree
-There must be no duplicate values
+ * The left subtree of a node contains only nodes with values less than the node’s value
+ * The right subtree of a node contains only nodes with values greater than the node’s value
+ * The left and right subtree each must also be a binary search tree
+ * There must be no duplicate values
 
 ### [25. BST - Insert](./111-bst_insert.c)
 * Write a function that inserts a value in a Binary Search Tree
@@ -266,8 +265,8 @@ There must be no duplicate values
   * Properties of an AVL Tree:
 
 An AVL Tree is a BST
-The difference between heights of left and right subtrees cannot be more than one
-The left and right subtree each must also be a binary search tree
+ * The difference between heights of left and right subtrees cannot be more than one
+ * The left and right subtree each must also be a binary search tree
 
 ### [31. AVL - Insert](./121-avl_insert.c)
 * Write a function that inserts a value in an AVL Tree
@@ -320,9 +319,9 @@ The left and right subtree each must also be a binary search tree
   * If tree is NULL, return 0
  
 Properties of a Max Binary Heap:
-  * It’s a complete tree
-  * In a Max Binary Heap, the value at root must be maximum among all values present in Binary Heap
-  * The last property must be recursively true for all nodes in Binary Tree
+ * It’s a complete tree
+ * In a Max Binary Heap, the value at root must be maximum among all values present in Binary Heap
+ * The last property must be recursively true for all nodes in Binary Tree
 
 ### [37. Heap - Insert](./131-heap_insert.c)
 * Write a function that inserts a value in Max Binary Heap
