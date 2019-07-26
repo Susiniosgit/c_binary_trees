@@ -298,7 +298,7 @@ The left and right subtree each must also be a binary search tree
 
 ### [34. AVL - From sorted array](./124-sorted_array_to_avl.c)
 * Write a function that builds an AVL tree from an array
-  * Prototype: avl_t *sorted_array_to_avl(int *array, size_t size);
+  * Prototype: ```avl_t *sorted_array_to_avl(int *array, size_t size)```;
   * Where array is a pointer to the first element of the array to be converted
   * And size is the number of element in the array
   * Your function must return a pointer to the root node of the created AVL tree, or NULL on failure
@@ -314,28 +314,57 @@ The left and right subtree each must also be a binary search tree
 
 ### [36. Is Binary heap](./130-binary_tree_is_heap.c)
 * Write a function that checks if a binary tree is a valid Max Binary Heap
-
+  * Prototype: ```int binary_tree_is_heap(const binary_tree_t *tree)```;
+  * Where tree is a pointer to the root node of the tree to check
+  * Your function must return 1 if tree is a valid Max Binary Heap, and 0 otherwise
+  * If tree is NULL, return 0
+ 
+Properties of a Max Binary Heap:
+  * It’s a complete tree
+  * In a Max Binary Heap, the value at root must be maximum among all values present in Binary Heap
+  * The last property must be recursively true for all nodes in Binary Tree
 
 ### [37. Heap - Insert](./131-heap_insert.c)
 * Write a function that inserts a value in Max Binary Heap
-
+  * Prototype: ```heap_t *heap_insert(heap_t **root, int value)```
+  * Where tree is a double pointer to the root node of the Heap to insert the value
+  * And value is the value to store in the node to be inserted
+  * Your function must return a pointer to the created node, or NULL on failure
+  * If the address stored in tree is NULL, the created node must become the root node.
+  * You have to respect a Max Heap ordering
+  * You are allowed to have up to 6 functions in your file
 
 ### [38. Heap - Array to Binary Heap](./132-array_to_heap.c)
 * Write a function that builds a Max Binary Heap tree from an array
-
+  * Prototype: ```heap_t *array_to_heap(int *array, size_t size)```;
+  * Where array is a pointer to the first element of the array to be converted
+  * And size is the number of element in the array
+  * Your function must return a pointer to the root node of the created Binary Heap, or NULL on failure
 
 ### [39. Heap - Extract](./133-heap_extract.c)
 * Write a function that extracts the root node of a Max Binary Heap
-
+  * Prototype: ```int heap_extract(heap_t **root)```;
+  * Where root is a double pointer to the root node of heap
+  * Tour function must return the value stored in the root node
+  * The root node must be freed and replace with the last level-order node of the heap
+  * Once replaced, the heap must be rebuilt if necessary
+  * If your function fails, return 0
 
 ### [40. Heap - Sort](./134-heap_to_sorted_array.c)
 * Write a function that converts a Binary Max Heap to a sorted array of integers
-
+  * Prototype: ```int *heap_to_sorted_array(heap_t *heap, size_t *size)```;
+  * Where heap is a pointer to the root node of the heap to convert
+  * And size is an address to store the size of the array
+  * You can assume size is a valid address
+  * Since we are using Max Heap, the returned array must be sorted in descending order
 
 ### [41. Big O #Binary Heap](./135-O)
 * What are the average time complexities of those operations on a Binary Heap (one answer per line):
-
+  * Inserting the value n
+  * Extracting the root node
+  * Searching for a node in a binary heap of size n
 ---
+
 
 ## Author
 * **Tu Vo** - [tuvo1106](github.com/tuvo1106)
