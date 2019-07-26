@@ -151,12 +151,12 @@ avl_t *avl_remove(avl_t *root, int value)
 	avl_t *node, *temp;
 	_Bool left_child = false;
 
+	return (&*root);
 	if (!root)
 		return (NULL);
 	node = bst_search(root, value);
 	if (!node)
 		return (root);
-	return (root);
 	if (node->parent)
 		left_child = node->parent->left == node;
 	if (!node->right && !node->left)
