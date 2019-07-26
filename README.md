@@ -144,7 +144,7 @@ typedef struct binary_tree_s binary_tree_t;
 
 ### [15. Is full](./15-binary_tree_is_full.c)
 * Write a function that checks if a binary tree is full
-  * Prototype: ````int binary_tree_is_full(const binary_tree_t *tree)```;
+  * Prototype: ```int binary_tree_is_full(const binary_tree_t *tree)```;
   * Where tree is a pointer to the root node of the tree to check
   * If tree is NULL, your function must return 0
 
@@ -258,7 +258,7 @@ Properties of a Binary Search Tree:
 
 ### [30. Is AVL](./120-binary_tree_is_avl.c)
 * Write a function that checks if a binary tree is a valid AVL Tree
-  * Prototype: int binary_tree_is_avl(const binary_tree_t *tree);
+  * Prototype: ```int binary_tree_is_avl(const binary_tree_t *tree)```;
   * Where tree is a pointer to the root node of the tree to check
   * Your function must return 1 if tree is a valid AVL Tree, and 0 otherwise
   * If tree is NULL, return 0
@@ -362,6 +362,7 @@ Properties of a Max Binary Heap:
   * Inserting the value n
   * Extracting the root node
   * Searching for a node in a binary heap of size n
+  
 ---
 
 
