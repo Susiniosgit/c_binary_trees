@@ -1,5 +1,7 @@
 # 0x1D. C - Binary trees
 
+![binary-trees-screenshot](https://github.com/tuvo1106/c_binary_trees/blob/master/img/binary_trees_screenshot.png)
+
 ## Learning Objectives
 
 General
@@ -409,7 +411,7 @@ Properties of a Max Binary Heap:
   - Extracting the root node
   - Searching for a node in a binary heap of size n
 
-## Author
+## Authors
 
 - [Arthur Damm](https://github.com/arthurdamm/twodoor) ~ [LinkedIn](https://www.linkedin.com/in/arthur-damm-96527042/) ~ [@arthurdamm](https://twitter.com/arthurdamm):
 *Sharpening my skills at Holberton School of Software Engineering. I have a lifelong passion for programming with a background in mathematics and a daily meditation practice. Spent the last several years enjoying working as a private tutor and am now excited to practice software wizardry professionally.*
